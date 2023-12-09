@@ -11,8 +11,18 @@ https://drive.google.com/drive/folders/14YmzV3eUagTSMGXVJ_qW6ETnQfW8sai1?usp=sha
 
 ## How to predict audio
 To make predictions using our model, follow these step-by-step instructions <br>
-
-1. Load Model
+1. Import packages
+   ```
+   import librosa
+   import numpy as np
+   import matplotlib.pyplot as plt
+   import tensorflow as tf
+   from scipy.signal import spectrogram
+   import tensorflow_io as tfio
+   import tensorflow_hub as hub
+   import csv
+   ```
+1. Load model
    ```
     from keras.models import load_model
     model_path = '/kaggle/working/model_polos_inception_89.h5' #CHANGE THIS
@@ -20,8 +30,6 @@ To make predictions using our model, follow these step-by-step instructions <br>
    ```
 1. Load labels from csv
    ```
-   import csv
-
    def load_labels_from_csv(csv_file_path):
     labels = []
 

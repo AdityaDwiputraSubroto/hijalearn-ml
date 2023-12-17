@@ -14,7 +14,6 @@ To make predictions using our model, follow these step-by-step instructions <br>
 1. Import packages
    ```
    import librosa
-   import librosa.display
    import numpy as np
    import matplotlib.pyplot as plt
    import tensorflow as tf

@@ -101,7 +101,7 @@ To make predictions using our model, follow these step-by-step instructions <br>
 1. Predict
    ```
    def predict_audio(audio_file, true_label, label_list):
-    spectrogram = process_audio_to_spectrogram(audio_file, target_length=12000)
+    spectrogram = process_audio_to_spectrogram(audio_file, target_length=18000)
     spectrogram = np.expand_dims(spectrogram, axis=0)
     predicted = model.predict(spectrogram)
     top_predict_index = np.argmax(predicted, axis=1)

@@ -105,33 +105,39 @@ To make predictions using our model, follow these step-by-step instructions <br>
     spectrogram = np.expand_dims(spectrogram, axis=0)
     predicted = model.predict(spectrogram)
     top_predict_index = np.argmax(predicted, axis=1)
-    label_name = label_list[int(top_predict)]
+    label_name = label_list[int(top_predict_index)]
     probability = predicted[0,top_predict_index]
     
-    return predicted, top_predict_index, label_name, probability
+    if true_label == label_name and probability>0.6:
+            correct = True
+    else:
+            correct = False
+            
+    return correct, predicted, top_predict_index, label_name, probability
    ```
    ```
-   audio_file = "/kaggle/input/dataset-hijaiyah/Dataset Hijaiyah/Hijaiyah polos/25_Nun/2_4_NT_Noon_T10001.wav" #CHANGE THIS
-   true_label = '25_nun' #CHANGE THIS
-   predicted, top_predict_index, label_name, probability = predict_audio(audio_file, true_label, loaded_labels)
-
+   audio_file = "/kaggle/input/hijaiyah-all/Dataset Hijaiyah/Hijaiyah polos/11_Za/1_0_NT_Za_T10 (2).wav"
+   true_label = '11_Za'
+   correct, predicted, top_predict_index, label_name, probability = predict_audio(audio_file, true_label, loaded_labels)
    print("Predict result : ", predicted)
    print("\nLabel index\t\t: ", top_predict_index)
    print("Predicted label name\t: ", label_name)
    print("True Label name\t\t: ", true_label)
    print("Probability\t\t: ",probability)
+   print("Correct?\t\t: ",correct)
    ```
    Output
    ```
-   Predict result :  [[2.6527500e-09 1.8013134e-12 6.5256778e-10 1.3944617e-11 2.3759122e-15
-   1.1514542e-06 8.5240730e-09 1.5967119e-09 3.6847848e-07 7.1299451e-07
-   5.5577043e-08 8.0551532e-14 1.8430099e-09 8.5623647e-13 5.8353800e-07
-   9.3332565e-05 9.9983811e-01 4.4479260e-05 2.9057171e-13 1.3719097e-05
-   7.2057701e-06 1.3950576e-11 2.0036668e-15 1.1864861e-11 3.4788332e-07
-   2.4487580e-18 1.9933662e-16 1.1143029e-11 1.5962605e-10]]
-    
-   Label index		:  [16]
-   Predicted label name	:  25_Nun
-   True Label name		:  25_nun
-   Probability		:  [0.9998381]
+   Predict result :  [[5.9871570e-12 9.9999952e-01 5.0053152e-14 1.0658123e-19 1.0835376e-13
+     9.6104669e-12 1.6341000e-15 3.8584639e-07 5.7546735e-20 7.3074901e-13
+     1.4545040e-13 2.2054159e-11 1.7658119e-15 9.1710222e-15 2.6104492e-14
+     7.3043607e-15 1.5159074e-17 2.9278770e-11 1.1090896e-12 1.9755935e-09
+     4.0145016e-11 4.3219130e-09 7.9129232e-13 6.4669340e-16 5.1729721e-15
+     2.3864520e-15 3.3022500e-12 2.1758172e-15 5.6094798e-08]]
+   
+   Label index		:  [1]
+   Predicted label name	:  11_Za
+   True Label name		:  11_Za
+   Probability		:  [0.9999995]
+   Correct?		:  True
    ```
